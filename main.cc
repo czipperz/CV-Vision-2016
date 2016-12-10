@@ -106,7 +106,7 @@ int main(int numArgs, char**) {
                      CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE,
                      cv::Point(0, 0));
 
-        std::vector<std::vector<cv::Point> > hull(contours.size());
+        std::vector<cv::Point> hull;
 
         pugi::xml_document sendToRio;
 
@@ -121,14 +121,14 @@ int main(int numArgs, char**) {
                 cv::Point(boundRect.width / 2, boundRect.height / 2) +
                 boundRect.tl();
 
-            cv::convexHull(cv::Mat(contours[idx]), hull[0], false);
+            cv::convexHull(cv::Mat(contours[idx]), hull, false);
             //drawContours(masked_bgr, boundRect, idx, Scalar(0, 0, 255));
             //drawContours(masked_bgr, contours, idx,
             //             Scalar(0, 255, 255), 1, 8, noArray(), 0,
             //             Point());
 
             //Find the U shape
-            const double hullArea = contourArea(hull[0]);
+            const double hullArea = contourArea(hull);
             const double contArea = contourArea(contours[idx]);
             //double perimeter = arcLength(contours[idx], false);
             const double areaRatio = hullArea / contArea;
