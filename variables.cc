@@ -8,8 +8,6 @@ const char* const hostName = "roborio-955-frc.local";
 const int ESC = 27;
 const int portno = 5805;
 
-bool UI = false;
-
 //Images
 cv::Mat src, hsvSrc, hsvFiltered, maskedBgr, rectRoi, rectRoiCanny;
 

@@ -33,7 +33,7 @@
 #include <thread>
 
 int main(int numArgs, char**) {
-    UI = (numArgs == 2); //Set in UI mode if there is an argument
+    bool UI = (numArgs == 2); //Set in UI mode if there is an argument
 
     std::cout << "Vision Starting..." << std::endl;
     pugi::xml_document settings;

@@ -13,8 +13,6 @@ extern const char* const hostName;
 extern const int ESC;
 extern const int portno;
 
-extern bool UI;
-
 //Images
 extern cv::Mat src, hsvSrc, hsvFiltered, maskedBgr, rectRoi, rectRoiCanny;
 //Trackbars
