@@ -1,6 +1,3 @@
-#ifndef HEADER_GUARD_VISION_H
-#define HEADER_GUARD_VISION_H
-
 #include "calculations.hh"
 #include "clamp.hh"
 #include "line_info.hh"
@@ -294,5 +291,3 @@ int main(int numArgs, char**) {
 
     return 0;
 }
-
-#endif
