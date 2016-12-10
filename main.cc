@@ -33,7 +33,7 @@
 #include <thread>
 
 int main(int numArgs, char**) {
-    bool UI = (numArgs == 2); //Set in UI mode if there is an argument
+    bool UI = numArgs == 2; //Set in UI mode if there is an argument
 
     std::cout << "Vision Starting..." << std::endl;
     pugi::xml_document settings;
@@ -96,27 +96,30 @@ int main(int numArgs, char**) {
         const cv::Mat element =
             getStructuringElement(cv::MORPH_RECT,
                                   cv::Size(2 * morphSlider + 1,
-                                       2 * morphSlider + 1),
-                                  cv::Point(morphSlider, morphSlider));
-        cv::morphologyEx(hsvFiltered, hsvFiltered, cv::MORPH_OPEN, element);
+                                           2 * morphSlider + 1),
+                                  cv::Point(morphSlider,
+                                            morphSlider));
+        cv::morphologyEx(hsvFiltered, hsvFiltered, cv::MORPH_OPEN,
+                         element);
         //Mask the final image by the HSV selection
         src.copyTo(maskedBgr, hsvFiltered);
 
         cv::findContours(hsvFiltered.clone(), contours,
-                     CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE,
-                     cv::Point(0, 0));
+                         CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE,
+                         cv::Point(0, 0));
 
         std::vector<cv::Point> hull;
 
         pugi::xml_document sendToRio;
 
         pugi::xml_node visionNode = sendToRio.append_child("Vision");
-        visionNode.append_attribute("frameNumber").set_value(frameCount);
+        visionNode.append_attribute("frameNumber")
+            .set_value(frameCount);
 
         u_int shapeCount = 0;
 
         for (std::size_t idx = 0; idx < contours.size(); idx++) {
-            cv::Rect boundRect = boundingRect(contours[idx]); // boundingbox
+            cv::Rect boundRect = boundingRect(contours[idx]);
             cv::Point boundCenter =
                 cv::Point(boundRect.width / 2, boundRect.height / 2) +
                 boundRect.tl();
@@ -204,14 +207,14 @@ int main(int numArgs, char**) {
                 //      0.5) *
                 //     200.0;
 
-                const int screenCenterX = (pixelWidth / 2);
-                const int distanceToCenterX =
-                    screenCenterX -
-                    (boundCenter.x + (boundRect.width / 2));
+                const int screenCenterX = pixelWidth / 2;
+                const int distanceToCenterX = screenCenterX -
+                                              boundCenter.x +
+                                              boundRect.width / 2;
                 const int yPos = boundCenter.y;
-                const double distanceToGoal = (3e-6 * pow(yPos, 3)) +
-                                        (-1e-3 * pow(yPos, 2)) +
-                                        (0.315 * yPos) - 0.557;
+                const double distanceToGoal =
+                    0.000003 * pow(yPos, 3) + -0.001 * pow(yPos, 2) +
+                    0.315 * yPos - 0.557;
                 const int distanceToCenterXMagnitude =
                     clamp(160.0f * distanceToCenterX / screenCenterX,
                           -100.f, 100.f);
