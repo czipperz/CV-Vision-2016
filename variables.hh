@@ -6,9 +6,9 @@
 #include <string>
 
 extern std::mutex mutex;
-extern std::string socket_send_xml_buffer;
+extern std::string socketSendXmlBuffer;
 
-extern const char* const host_name;
+extern const char* const hostName;
 
 extern const int ESC;
 extern const int portno;
@@ -16,32 +16,32 @@ extern const int portno;
 extern bool UI;
 
 //Images
-extern cv::Mat src, hsv_src, hsv_filtered, masked_bgr, rect_ROI, rect_ROI_canny;
+extern cv::Mat src, hsvSrc, hsvFiltered, maskedBgr, rectRoi, rectRoiCanny;
 //Trackbars
-extern const int slider_max_sat_val;
-extern const int slider_max_hue;
+extern const int sliderMaxSatVal;
+extern const int sliderMaxHue;
 
 //Data
 
 //Reflective tape (High Light)
 //Lower
-extern int hue_slider_lower;
-extern int sat_slider_lower;
-extern int val_slider_lower;
+extern int hueSliderLower;
+extern int satSliderLower;
+extern int valSliderLower;
 //Upper
-extern int hue_slider_upper;
-extern int sat_slider_upper;
-extern int val_slider_upper;
+extern int hueSliderUpper;
+extern int satSliderUpper;
+extern int valSliderUpper;
 //Canny
-extern int canny_slider;
+extern int cannySlider;
 //Hough
-extern int hough_slider;
+extern int houghSlider;
 //Morph
-extern int morph_slider;
-extern int morph_slider_max;
+extern int morphSlider;
+extern int morphSliderMax;
 //Shape-detect
-extern int shape_slider_max;
-extern int shape_slider_lower;
-extern int shape_slider_upper;
+extern int shapeSliderMax;
+extern int shapeSliderLower;
+extern int shapeSliderUpper;
 
 #endif

@@ -32,4 +32,6 @@ public:
 
 void swap(Socket&, Socket&) noexcept;
 
+struct sockaddr_in getServerAddress();
+
 #endif
