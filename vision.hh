@@ -248,15 +248,15 @@ int main(int numArgs, char**) {
 
                 std::vector<LineInfo> lineInfoCache(lines.size());
                 LineInfo line_exclude = getInfo(cv::Vec4i(0,0,0,0));
-                for (std::size_t i = 0; i < lines.size(); i++) {
-                    LineInfo current = getInfo(lines[i]);
+		 std::for_each (lines.begin(), lines.end(), [&](const LineInfo& lineInfo) {
+                    LineInfo current = getInfo(lineInfo);
                     // Exclude slopes > 45 degrees
                     if (current.slope < 1.0 && current.slope > -1.0) {
                         lineInfoCache[i] = current;
                     } else {
                         lineInfoCache[i] = line_exclude;
                     }
-                }
+		 });
 
                 std::sort(lineInfoCache.begin(), lineInfoCache.end(),
                           [](const LineInfo& a, const LineInfo& b) {
@@ -264,8 +264,8 @@ int main(int numArgs, char**) {
                           });
 
                 double transMag = 0.0;
-                for (size_t i = 0; i < lines.size(); i++) {
-                    const cv::Vec4i& l = lines[i];
+                std::for_each (lines.begin(), lines.end(), [&](const LineInfo& lineInfo) {
+                    const cv::Vec4i& l = lineInfo;
                     if (calcLength(l) == lineInfoCache[0].length) {
                         line(masked_bgr,
                              cv::Point(l[0], l[1]) + boundRect.tl(),
@@ -287,7 +287,7 @@ int main(int numArgs, char**) {
                                 cv::FONT_HERSHEY_COMPLEX_SMALL, 1,
                                 cv::Scalar(0, 0, 255));
                     }
-                }
+                });
 
                 circle(masked_bgr, boundCenter, 5, cv::Scalar(0, 255, 0),
                        1, 8, 0);
