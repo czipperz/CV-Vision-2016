@@ -9,7 +9,12 @@ const int ESC = 27;
 const int portno = 5805;
 
 //Images
-cv::Mat src, hsvSrc, hsvFiltered, maskedBgr, rectRoi, rectRoiCanny;
+cv::Mat src;
+cv::Mat hsvSrc;
+cv::Mat hsvFiltered;
+cv::Mat maskedBgr;
+cv::Mat rectRoi;
+cv::Mat rectRoiCanny;
 
 //Trackbars
 const int sliderMaxSatVal = 256;

@@ -1,8 +1,8 @@
 #ifndef HEADER_GUARD_VARIABLES_H
 #define HEADER_GUARD_VARIABLES_H
 
-#include <opencv2/opencv.hpp>
 #include <mutex>
+#include <opencv2/opencv.hpp>
 #include <string>
 
 extern std::mutex mutex;
@@ -14,14 +14,18 @@ extern const int ESC;
 extern const int portno;
 
 //Images
-extern cv::Mat src, hsvSrc, hsvFiltered, maskedBgr, rectRoi, rectRoiCanny;
+extern cv::Mat src;
+extern cv::Mat hsvSrc;
+extern cv::Mat hsvFiltered;
+extern cv::Mat maskedBgr;
+extern cv::Mat rectRoi;
+extern cv::Mat rectRoiCanny;
+
 //Trackbars
 extern const int sliderMaxSatVal;
 extern const int sliderMaxHue;
 
 //Data
-
-//Reflective tape (High Light)
 //Lower
 extern int hueSliderLower;
 extern int satSliderLower;
