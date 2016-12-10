@@ -10,14 +10,12 @@ public:
     cv::Vec4i line;
     float length;
     float slope;
-    cv::Point midPt;
 
     LineInfo() {}
     LineInfo(const cv::Vec4i& line)
         : line(line)
         , length(calcLength(line))
-        , slope(calcSlope(line))
-        , midPt(calcMidPt(line)) {}
+        , slope(calcSlope(line)) {}
 };
 
 static inline LineInfo createLineInfo(const cv::Vec4i& line) {
