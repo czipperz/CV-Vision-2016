@@ -65,7 +65,7 @@ struct sockaddr_in getServerAddress() {
     struct hostent* server = gethostbyname(hostName);
 
     while (server == NULL) {
-        std::cout << "No such host" << std::endl;
+        std::puts("No such host");
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         server = gethostbyname(hostName);
     }

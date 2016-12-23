@@ -8,8 +8,9 @@ void parse_settings(pugi::xml_document& settings) {
         if (const pugi::xml_parse_result result = settings.load_file(
                 "/home/ubuntu/slidersettings.xml")) {
         } else {
-            std::cerr << "ERROR loading XML document "
-                      << result.description() << std::endl;
+            std::fputs("ERROR loading XML document ", stderr);
+            std::fputs(result.description(), stderr);
+            std::fputc('\n', stderr);
             std::exit(EXIT_FAILURE);
         }
 
@@ -26,6 +27,6 @@ void parse_settings(pugi::xml_document& settings) {
         shapeSliderLower = settingRoot.attribute("ShapeLw").as_int();
         shapeSliderUpper = settingRoot.attribute("ShapeUp").as_int();
     } catch (int e) {
-        std::cout << "Slider XML parse failed" << std::endl;
+        std::puts("Slider XML parse failed");
     }
 }

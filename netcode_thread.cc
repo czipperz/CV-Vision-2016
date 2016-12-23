@@ -6,11 +6,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <chrono>
-#include <iostream>
 #include <cstring>
 #include <mutex>
 #include <string>
 #include <thread>
+#include <cstdio>
 
 void netcodeThread() {
     std::cout << "Netcode booting..." << std::endl;
@@ -21,13 +21,13 @@ void netcodeThread() {
 
         struct sockaddr_in server_address = getServerAddress();
         if (socket.connect(server_address) < 0) {
-            std::cout << "Connect error" << std::endl;
+            std::puts("Connection error.\n");
             std::this_thread::sleep_for(
                 std::chrono::milliseconds(200));
             continue;
         }
 
-        std::cout << "Connected to RIO\n" << std::endl;
+        std::puts("Connected to RIO\n");
 
         //Loop to handle all requests
         while (true) {
@@ -38,7 +38,8 @@ void netcodeThread() {
 
             if (bufferLength > 0) {
                 buf[bufferLength] = 0;
-                std::cout << "Got Request: " << buf << std::endl;
+                std::fputs("Got request: ", stdout);
+                std::puts(buf);
             } else {
                 break;
             }
@@ -52,11 +53,12 @@ void netcodeThread() {
             }
             socket.send(buf, bufferLength);
             buf[bufferLength] = 0;
-            std::cout << "Sent: " << buf << std::endl;
+            std::fputs("Sent: ", stdout);
+            std::puts(buf);
         }
 
-        std::cout << "Disconnected\n" << std::endl;
+        std::puts("Disconnected\n");
     }
 
-    std::cout << "Client loop failed\n" << std::endl;
+    std::puts("Client loop failed\n");
 }

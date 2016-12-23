@@ -35,7 +35,7 @@
 int main(int numArgs, char**) {
     bool UI = numArgs == 2; //Set in UI mode if there is an argument
 
-    std::cout << "Vision Starting..." << std::endl;
+    std::puts("Vision Starting...");
     pugi::xml_document settings;
     parse_settings(settings);
 
@@ -43,7 +43,7 @@ int main(int numArgs, char**) {
 
     cv::VideoCapture cap(-1); // open the default camera
     if (!cap.isOpened()) {  // check if we succeeded
-        std::cout << "Camera not found" << std::endl;
+        std::puts("Camera not found");
         return -1;
     }
 
@@ -65,12 +65,12 @@ int main(int numArgs, char**) {
     std::vector<std::vector<cv::Point> > contours;
     u_int frameCount = 0;
 
-    std::cout << "Starting netcode thread..." << std::endl;
+    std::puts("Starting netcode thread...");
 
     std::thread other(netcodeThread);
     other.detach();
 
-    std::cout << "Start vision loop" << std::endl;
+    std::puts("Start vision loop");
 
     while (cv::waitKey(1) != ESC) {
         ++frameCount;
@@ -290,7 +290,7 @@ int main(int numArgs, char**) {
         }
     }
 
-    std::cout << "Vision crashed" << std::endl;
+    std::puts("Vision crashed");
 
     return 0;
 }
