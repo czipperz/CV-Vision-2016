@@ -1,12 +1,11 @@
 #ifndef HEADER_GUARD_VARIABLES_H
 #define HEADER_GUARD_VARIABLES_H
 
-#include <mutex>
 #include <opencv2/opencv.hpp>
 #include <string>
+#include "mutexed.hh"
 
-extern std::mutex mutex;
-extern std::string socketSendXmlBuffer;
+extern mutexed<std::string> socketSendXmlBuffer;
 
 extern const char* const hostName;
 

@@ -285,8 +285,8 @@ int main(int numArgs, char**) {
 
         //TODO send XML
         {
-            std::lock_guard<std::mutex> lock(mutex);
-            socketSendXmlBuffer = std::move(toRep);
+            auto handle(socketSendXmlBuffer.lock());
+            *handle = std::move(toRep);
         }
     }
 

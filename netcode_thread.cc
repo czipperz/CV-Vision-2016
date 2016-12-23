@@ -45,9 +45,9 @@ void netcodeThread() {
             //Send a response
             //Retrieve respons from other thread
             {
-                std::lock_guard<std::mutex> lock(mutex);
-                bufferLength = socketSendXmlBuffer.size();
-                std::memcpy(buf, socketSendXmlBuffer.c_str(),
+                auto handle(socketSendXmlBuffer.lock());
+                bufferLength = handle->size();
+                std::memcpy(buf, handle->c_str(),
                             bufferLength);
             }
             socket.send(buf, bufferLength);

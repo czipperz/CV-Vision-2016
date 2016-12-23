@@ -1,7 +1,6 @@
 #include "variables.hh"
 
-std::mutex mutex;
-std::string socketSendXmlBuffer;
+mutexed<std::string> socketSendXmlBuffer;
 
 const char* const hostName = "roborio-955-frc.local";
 
