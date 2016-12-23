@@ -32,8 +32,6 @@ void netcodeThread() {
         //Loop to handle all requests
         while (true) {
             //Read a request
-            //memset(buf,0,strlen(buf));
-
             ssize_t bufferLength = socket.read(buf, sizeof(buf));
 
             if (bufferLength > 0) {
@@ -45,6 +43,7 @@ void netcodeThread() {
             }
 
             //Send a response
+            //Retrieve respons from other thread
             {
                 std::lock_guard<std::mutex> lock(mutex);
                 bufferLength = socketSendXmlBuffer.size();
